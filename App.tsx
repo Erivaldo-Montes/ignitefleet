@@ -4,7 +4,8 @@ import { StatusBar } from "react-native";
 import { REALME_APP_ID } from "@env";
 import theme from "./src/theme";
 import { SignIn } from "./src/screens/signIn";
-import { Home } from "./src/screens/Home";
+import { Routes } from "./src/routes";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import {
   useFonts,
   Roboto_400Regular,
@@ -23,14 +24,16 @@ export default function App() {
   return (
     <AppProvider id={REALME_APP_ID}>
       <ThemeProvider theme={theme}>
-        <StatusBar
-          barStyle={"light-content"}
-          backgroundColor={"transparent"}
-          translucent
-        />
-        <UserProvider fallback={SignIn}>
-          <Home />
-        </UserProvider>
+        <SafeAreaProvider>
+          <StatusBar
+            barStyle={"light-content"}
+            backgroundColor={"transparent"}
+            translucent
+          />
+          <UserProvider fallback={SignIn}>
+            <Routes />
+          </UserProvider>
+        </SafeAreaProvider>
       </ThemeProvider>
     </AppProvider>
   );
